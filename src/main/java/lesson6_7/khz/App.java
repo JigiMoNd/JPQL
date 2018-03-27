@@ -1,6 +1,7 @@
 package lesson6_7.khz;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -21,13 +22,48 @@ public class App
       
       em.getTransaction().begin();
       
-      List<Comment> comments = em.createQuery("SELECT c FROM Comment c", Comment.class)
-    		  .getResultList();
+//      List<Comment> comments = em.createQuery("SELECT c FROM Comment c", Comment.class)
+//    		  .getResultList();
 //      comments.forEach(c -> System.out.println(c));
+//      
+//      Comment commentById = em.createQuery("SELECT c FROM Comment c WHERE c.id = :any_value", Comment.class)
+//    		  .setParameter("any_value", 43).getSingleResult();
+//      System.out.println(commentById);
+//      
+//      List<Post> post = em.createQuery("SELECT p FROM Post p WHERE p.id > :post_id", Post.class)
+//    		  .setParameter("post_id", 50).getResultList();
+//      post.forEach(p -> System.out.println(p));
+//      
+//      List<Post> posts = em.createQuery("SELECT p FROM Post p WHERE p.id IN (:ids)", Post.class)
+//    		  .setParameter("ids", Arrays.asList(2, 56, 47, 34, 55)).getResultList();
+//      posts.forEach(p -> System.out.println(p));
+//      
+//      List<Post> posts = em.createQuery("SELECT p FROM Post p WHERE p.title LIKE :p_title", Post.class)
+//    		  .setParameter("p_title", "%8_").getResultList();
+//      posts.forEach(p -> System.out.println(p));
+//      
+//      List<Post> posts = em.createQuery("SELECT p FROM Post p WHERE p.id BETWEEN :first AND :last", Post.class)
+//    		  .setParameter("first", 76)
+//    		  .setParameter("last", 89).getResultList();
+//      posts.forEach(p -> System.out.println(p));
       
-      Comment commentById = em.createQuery("SELECT c FROM Comment c WHERE c.id = :any_value", Comment.class)
-    		  .setParameter("any_value", 43).getSingleResult();
-      System.out.println(commentById);
+//      
+//      Long count = em.createQuery("SELECT count(c.id) FROM Comment c", Long.class).getSingleResult();
+//      System.out.println("Count: " + count);
+//      
+//      Long sum = em.createQuery("SELECT sum(c.id) FROM Comment c", Long.class).getSingleResult();
+//      System.out.println("Sum: " + sum);
+//      
+//      Double avg = em.createQuery("SELECT avg(c.id) FROM Comment c", Double.class).getSingleResult();
+//      System.out.println("Avg " + avg);
+
+      Integer max = em.createQuery("SELECT max(c.id) FROM Comment c", Integer.class).getSingleResult();
+      System.out.println("Max " + max);
+      
+      Integer min = em.createQuery("SELECT min(c.id) FROM Comment c", Integer.class).getSingleResult();
+      System.out.println("Min " + min);
+      
+      
       
 //      addTags(em);
 //      addPost(em);
