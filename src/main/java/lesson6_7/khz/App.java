@@ -25,8 +25,8 @@ public class App
     		  .getResultList();
 //      comments.forEach(c -> System.out.println(c));
       
-      Comment commentById = em.createQuery("SELECT c FROM Comment c WHERE c.id = :id", Comment.class)
-    		  .setParameter("id", 43).getSingleResult();
+      Comment commentById = em.createQuery("SELECT c FROM Comment c WHERE c.id = :any_value", Comment.class)
+    		  .setParameter("any_value", 43).getSingleResult();
       System.out.println(commentById);
       
 //      addTags(em);
