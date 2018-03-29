@@ -1,5 +1,6 @@
 package lesson6_7.khz;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.Persistence;
 
 import Entiti.Comment;
 import Entiti.Post;
+import Entiti.Product;
 import Entiti.Tag;
 import Entiti_enum.Status;
 
@@ -57,11 +59,24 @@ public class App
 //      Double avg = em.createQuery("SELECT avg(c.id) FROM Comment c", Double.class).getSingleResult();
 //      System.out.println("Avg " + avg);
 
-      Integer max = em.createQuery("SELECT max(c.id) FROM Comment c", Integer.class).getSingleResult();
-      System.out.println("Max " + max);
+//      Integer max = em.createQuery("SELECT max(c.id) FROM Comment c", Integer.class).getSingleResult();
+//      System.out.println("Max " + max);
+//      
+//      Integer min = em.createQuery("SELECT min(c.id) FROM Comment c", Integer.class).getSingleResult();
+//      System.out.println("Min " + min);
+//
+//      Product product = em.createQuery("SELECT p FROM Product p WHERE p.id = ?1", Product.class)
+//    		  .setParameter(1, 5).getSingleResult();
+//      System.out.println(product);
+
+//      Post post = em.createQuery("SELECT p FROM Post p WHERE p.id = :id", Post.class)
+//    		  .setParameter("id", 5).getSingleResult();
+//      System.out.println(post);
       
-      Integer min = em.createQuery("SELECT min(c.id) FROM Comment c", Integer.class).getSingleResult();
-      System.out.println("Min " + min);
+      Post post = em.createQuery("SELECT p FROM Post p RIGHT JOIN FETCH p.product pp WHERE p.id = :id", Post.class)
+    		  .setParameter("id", 9).getSingleResult();
+      System.out.println(post);
+      System.out.println(post.getProduct());
       
       
       
@@ -102,6 +117,15 @@ public class App
     		
     		if(i % 2 == 0) post.setStatus(Status.DRAFT);
     		if(i % 2 == 1) post.setStatus(Status.PUBLISH);
+    		
+    		Product product = new Product();
+    		product.setName("neme #" + i);
+    		product.setDescription("description #" + i);
+    		product.setPrice(new BigDecimal(i + 10 + ".00"));
+    		product.setInStock(15 + i);
+    		
+    		post.setProduct(product);
+    		
     		
     		em.persist(post);
     		
